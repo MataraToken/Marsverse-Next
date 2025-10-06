@@ -1,6 +1,7 @@
 
 
 "use client"
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import WebApp from "@twa-dev/sdk";
 import { Copy } from "lucide-react";
 import { useSelector } from "react-redux";

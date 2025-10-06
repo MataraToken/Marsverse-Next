@@ -12,7 +12,7 @@ import { addSpacesToNumber } from "../../utils";
 import { useCompleteTaskMutation } from "../../services/routes";
 import { useDispatch, useSelector } from "react-redux";
 import { setPoints, updateMissionStatus } from "../../services/redux/user";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 
 type MyModalProps = {
   setIsOpen: (string: boolean) => void;
@@ -21,7 +21,7 @@ type MyModalProps = {
 };
 
 function TaskModal({ setIsOpen, isOpen, data }: MyModalProps) {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [completeTask, { isLoading }] = useCompleteTaskMutation();
   const dispatch = useDispatch();
   const { username } = useSelector((state: any) => state.user.profile);
@@ -43,7 +43,7 @@ function TaskModal({ setIsOpen, isOpen, data }: MyModalProps) {
       const newPoints = points + data?.points;
       dispatch(setPoints(newPoints));
       setIsOpen(!isOpen);
-      navigate("/tasks");
+      router.push("/tasks");
     } catch (error) {
       console.log(error);
       setIsOpen(!isOpen);

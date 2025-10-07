@@ -37,7 +37,7 @@ export default function Home() {
 
       const allowedPlatforms = ["android", "ios", "tdesktop"];
       if (!allowedPlatforms.includes(WebApp.platform)) {
-        router.push("/supported");
+        router.push("/unsupported");
       } else {
         router.push("/supported");
       }

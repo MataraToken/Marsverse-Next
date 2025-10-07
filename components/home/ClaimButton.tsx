@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const ClaimButton = ({
   action,
   start,
@@ -29,7 +31,7 @@ const ClaimButton = ({
 
   return (
     <div className="flex flex-col mt-5 relative items-center justify-center">
-      <img src="/8.jpg" className="h-[300px] w-full object-cover object-top" alt="Majestic Lion" />
+      <Image src="/8.jpg" className="h-[300px] w-full object-cover object-top" alt="Majestic Lion" />
       <div className="grad-con absolute -top-5 flex items-start justify-center w-full p-1">
         <button
           disabled={isDisabled}

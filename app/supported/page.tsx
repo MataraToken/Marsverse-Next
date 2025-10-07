@@ -1,5 +1,4 @@
 "use client"
-import WebApp from "@twa-dev/sdk";
 import MiningStatus from "@/components/home/MiningStatus";
 import { useGetUserQuery } from "@/services/routes";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,7 +7,6 @@ import { useEffect } from "react";
 import { setProfile } from "@/services/redux/user";
 
 function Home() {
-  WebApp.BackButton.hide();
   const profile = useSelector((state: RootState) => state.user.profile);
   const savedUser = profile?.username;
   const dispatch = useDispatch();
@@ -19,7 +17,15 @@ function Home() {
     if (isSuccess) {
       dispatch(setProfile(user));
     }
-  }, [isSuccess, dispatch]);
+  }, [isSuccess, dispatch, user]);
+
+  useEffect(() => {
+    (async () => {
+        const WebApp = (await import("@twa-dev/sdk")).default;
+        WebApp.ready();
+        WebApp.BackButton.hide();
+    })();
+}, []);
 
 
   return (

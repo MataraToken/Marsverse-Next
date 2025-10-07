@@ -7,12 +7,11 @@ import {
 } from "@headlessui/react";
 import { GoPlus } from "react-icons/go";
 import { addSpacesToNumber } from "../../utils";
-// import smcoin from "../../assets/img/sm-coin.png";
-// import onion from "../../assets/img/onion.png";
 import { useCompleteTaskMutation } from "../../services/routes";
 import { useDispatch, useSelector } from "react-redux";
 import { setPoints, updateMissionStatus } from "../../services/redux/user";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 type MyModalProps = {
   setIsOpen: (string: boolean) => void;
@@ -82,7 +81,7 @@ function TaskModal({ setIsOpen, isOpen, data }: MyModalProps) {
                   </div>
                   <div className="flex flex-col items-center justify-center">
                     <div className="w-[88px] h-[88px]  flex items-center justify-center  rounded-[16px]">
-                      <img src={"/circle.png"} alt="" />
+                      <Image src={"/circle.png"} alt="" />
                     </div>
                     <p className="text-white font-inter font-[600] text-[24px] mt-[10px]">
                       Congratulations

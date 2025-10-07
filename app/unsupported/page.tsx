@@ -1,5 +1,7 @@
 // import React from 'react'
 
+import Image from "next/image"
+
 function Unsupported() {
     return (
       <div className="flex min-h-screen root flex-col items-center p-[60px_25px] w-full">
@@ -9,7 +11,7 @@ function Unsupported() {
         </p>
         <div className="h-[300px] lg:h-[350px]  w-[80%] flex-col rounded-[10px] mt-[10%] flex items-center justify-center">
           {/* <img src={sun} className="h-[300px]" alt="" /> */}
-          <img src="./qrcode_t.me.png" className="h-[300px]" alt="" />
+          <Image src="./qrcode_t.me.png" className="h-[300px]" alt="" />
           <a href="https://t.me/@MataraComBot" className="font-inter text-white text-[20px] mt-[2%] font-[700]">@MataraComBot</a>
         </div>
       </div>

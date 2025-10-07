@@ -5,6 +5,7 @@ import {
   Transition,
   TransitionChild,
 } from "@headlessui/react";
+import Image from "next/image";
 import { GoPlus } from "react-icons/go";
 
 type TokenSelectModalProps = {
@@ -65,7 +66,7 @@ function TokenSelectModal({ setIsOpen, isOpen, onSelectToken }: TokenSelectModal
                             onClick={() => handleSelectToken(token.name)}
                             className="flex items-center gap-4 p-2 rounded-lg hover:bg-gray-700"
                         >
-                            <img src={token.icon} alt={token.name} className="w-8 h-8"/>
+                            <Image src={token.icon} alt={token.name} className="w-8 h-8"/>
                             <span className="text-white font-inter font-[500] text-[18px]">{token.name}</span>
                         </button>
                     ))}

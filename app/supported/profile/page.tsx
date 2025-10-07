@@ -1,19 +1,20 @@
 "use client"
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import WebApp from "@twa-dev/sdk";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/services/store";
 import { useRouter } from "next/navigation";
 import { ranks } from "@/utils";
+import Image from "next/image";
 
 function Profile() {
-  WebApp.BackButton.show();
 
   useEffect(() => {
     (async () => {
       const WebApp = (await import("@twa-dev/sdk")).default;
       WebApp.ready();
+      WebApp.BackButton.show();
+
     })();
   }, []);
 
@@ -26,8 +27,15 @@ function Profile() {
   const router = useRouter();
 
   useEffect(() => {
-    WebApp.BackButton.onClick(() => router.back());
-  }, [WebApp, router]);
+    (async () => {
+      const WebApp = (await import("@twa-dev/sdk")).default;
+      WebApp.ready();
+      WebApp.BackButton.onClick(() => router.back());
+
+    })();
+  }, [router]);
+
+
 
   const username = user?.username;
 
@@ -36,7 +44,7 @@ function Profile() {
       {/* Profile Header */}
       <div className="flex flex-col items-center space-x-[10px] mt-[20px]">
         <div className="h-[70px] w-[70px] rounded-full border-[#44F58E] overflow-hidden border-[3px]">
-          <img
+          <Image
             src={user?.profilePicture || "/circle.png"}
             className="h-full w-full object-cover"
             alt=""
@@ -45,7 +53,7 @@ function Profile() {
         <div>
           <div className="flex items-center space-x-[10px]">
             <p className="text-[#CDCBC8]">@{username}</p>
-            <img src={"./warrior.svg"} className="h-[30px]" alt="" />
+            <Image src={"./warrior.svg"} className="h-[30px]" alt="" />
           </div>
         </div>
       </div>
@@ -53,7 +61,7 @@ function Profile() {
       {/* Rank / Points */}
       <div className="coin-bnt mt-[40px] font-[900]  border-[#44F58E] border p-[5px_15px] rounded-[8px] flex items-center space-x-[5px]">
         <p className="gradient-text text-[12px]">{user?.points} MARS</p>
-        <img src="./warrior.svg" className="h-[30px]" alt="" />
+        <Image src="./warrior.svg" className="h-[30px]" alt="" />
         <p className="gradient-text text-[12px]">{currentRank.name}</p>
       </div>
 

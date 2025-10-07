@@ -10,6 +10,7 @@ import {
   useGetMiningStateQuery,
   useStartMiningMutation,
 } from "@/services/routes";
+import Image from "next/image";
 
 const MINING_RATE_PER_SECOND = 0.0002; // tokens per second
 const MINING_DURATION_MS = 24 * 60 * 60 * 1000; // 24 hours
@@ -95,7 +96,7 @@ const MiningStatus = () => {
     }
 
     return () => clearInterval(interval);
-  }, [miningStatus, miningStartDate, dispatch]);
+  }, [miningStatus, miningStartDate, dispatch, amountMined]);
 
   // ✅ Start mining
   const toggleMining = async () => {
@@ -149,9 +150,9 @@ const MiningStatus = () => {
           </div>
           <div>
             {miningStatus ? (
-              <img src="/earn-up.svg" alt="Earning up" />
+              <Image src="/earn-up.svg" alt="Earning up" />
             ) : (
-              <img src="/earn-down.svg" alt="Earning down" />
+              <Image src="/earn-down.svg" alt="Earning down" />
             )}
           </div>
           <div>

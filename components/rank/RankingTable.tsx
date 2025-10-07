@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../services/store";
+import Image from "next/image";
 
 
 
@@ -62,7 +63,7 @@ const RankingTable = () => {
                     {user.user.username}
                   </th>
                   <td className="px-3 text-[12px] py-4 text-center text-gray-300 flex items-center justify-center gap-2">
-                    <img src={currentRank.icon} alt={currentRank.name} className="w-4 h-4" />
+                    <Image src={currentRank.icon} alt={currentRank.name} className="w-4 h-4" />
                     {currentRank.name}
                   </td>
                   <td className="px-3 text-[12px] py-4 text-center text-green-400">

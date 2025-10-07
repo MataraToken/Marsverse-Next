@@ -1,15 +1,15 @@
 "use client"
-import WebApp from "@twa-dev/sdk";
 import { useEffect, useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
 import TokenSelectModal from "@/components/modal/TokenSelectModal";
 
 function Swap() {
-    WebApp.BackButton.hide();
     useEffect(() => {
         (async () => {
           const WebApp = (await import("@twa-dev/sdk")).default;
           WebApp.ready();
+          WebApp.BackButton.hide();
+
         })();
       }, []);
     const [fromToken, setFromToken] = useState("TON");

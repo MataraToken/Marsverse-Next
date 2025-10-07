@@ -1,12 +1,12 @@
 "use client";
 
-import WebApp from "@twa-dev/sdk";
 import { FaCircleCheck } from "react-icons/fa6";
 import { useGetUserTasksQuery } from "@/services/routes";
 import { RootState } from "@/services/store";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface UserTask {
   slug: string;
@@ -18,12 +18,13 @@ interface UserTask {
 }
 
 function Task() {
-  WebApp.BackButton.hide();
 
   useEffect(() => {
     (async () => {
       const WebApp = (await import("@twa-dev/sdk")).default;
       WebApp.ready();
+      WebApp.BackButton.hide();
+
     })();
   }, []);
   const router = useRouter();
@@ -77,7 +78,7 @@ function Task() {
                       <div className="flex items-center space-x-[10px]">
                         <div className="h-[50px] min-w-[50px] w-[50px] rounded-full border overflow-hidden flex items-center justify-center bg-white">
                           {task.icon?.url ? (
-                            <img
+                            <Image
                               src={task.icon.url}
                               alt={task.title}
                               className="h-full w-full object-cover"

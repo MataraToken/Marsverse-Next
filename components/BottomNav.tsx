@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
@@ -27,7 +28,7 @@ const BottomNav = () => {
         onClick={() => router.push('/')}
         className="absolute z-20 w-20 h-20 flex items-center justify-center bottom-9 cursor-pointer"
       >
-        <img
+        <Image
           src="/circle.png"
           className="w-full h-full object-cover"
           alt="Home Button"

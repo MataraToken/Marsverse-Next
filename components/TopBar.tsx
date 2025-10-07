@@ -3,6 +3,7 @@ import MenuButton from "./MenuButton";
 import { useSelector } from "react-redux";
 import { RootState } from "../services/store";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 const TopBar = () => {
   const location = usePathname();
@@ -38,7 +39,7 @@ const TopBar = () => {
   return (
     <div className="flex bg-[#000F15] items-center justify-between sticky top-0 z-20 w-full p-3">
       <div className="flex items-center space-x-3">
-        <img src="/warrior.svg" alt="Warrior Icon" />
+        <Image src="/warrior.svg" alt="Warrior Icon" />
         {renderContent()}
       </div>
       <div className="flex items-center space-x-3">

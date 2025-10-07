@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { RootState } from "@/services/store";
+import Image from "next/image";
 
 export const ranks = [
   { name: "Cub Recruit", min: 0, max: 99, icon: "./recriut.png" },
@@ -76,7 +77,7 @@ function MataraRank() {
           className="font-[900] w-[70%] flex-col justify-center rounded-[8px] flex items-center"
         >
           <div className="flex flex-col items-center justify-center w-full">
-            <img
+            <Image
               className="h-[150px]"
               src={ranks[index].icon}
               alt={ranks[index].name}
@@ -111,7 +112,7 @@ function MataraRank() {
           <p className="gradient-text text-[14px]">
             {userPoints.toLocaleString()} MARS
           </p>
-          <img src={currentRank.icon} className="h-[30px]" alt="" />
+          <Image src={currentRank.icon} className="h-[30px]" alt="" />
           <p className="gradient-text text-[14px]">{currentRank.name}</p>
         </div>
       </div>

@@ -1,59 +1,55 @@
-"use client"
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import eruda from 'eruda';
-import { setUsername, setProfilePicture } from '@/services/redux/user';
-import { RootState } from '@/services/store';
-import WebApp from "@twa-dev/sdk";
-import { useRouter } from 'next/navigation';
 
+
+"use client";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setUsername, setProfilePicture } from "@/services/redux/user";
+import { RootState } from "@/services/store";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
-  const router = useRouter()
-  eruda.init();
-
-
-  // Configure Telegram WebApp
-  WebApp.isClosingConfirmationEnabled = true;
-  WebApp.isVerticalSwipesEnabled = false;
-
-  const [isSupported, setIsSupported] = useState(true);
+  const router = useRouter();
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user.profile);
-  const savedUser = user?.username;
-  const initUser = WebApp.initDataUnsafe?.user;
 
+  // ✅ Initialize eruda only on client
+  
   useEffect(() => {
-    if (!savedUser && initUser) {
-      dispatch(setUsername(initUser?.username));
-      dispatch(setProfilePicture(initUser?.photo_url));
-    }
-  }, [savedUser, initUser, dispatch]);
+    if (typeof window === "undefined") return;
 
- useEffect(() => {
-  WebApp.ready();
+    // Dynamically import eruda (only in browser)
+   
 
-  // Allow only Android, iOS, and Telegram Desktop
-  const allowedPlatforms = ["android", "ios", "tdesktop"];
-  if (!allowedPlatforms.includes(WebApp.platform)) {
-    setIsSupported(true);
-    router.push("supported")
-  }else {
-    router.push("supported")
-  }
+    // Dynamically import Telegram WebApp SDK
+    import("@twa-dev/sdk").then(({ default: WebApp }) => {
+      WebApp.isClosingConfirmationEnabled = true;
+      WebApp.isVerticalSwipesEnabled = false;
 
-  // Expand the WebApp
-  if (!WebApp.isExpanded) {
-    WebApp.expand();
-  }
-}, [WebApp]);
+      const savedUser = user?.username;
+      const initUser = WebApp.initDataUnsafe?.user;
 
+      if (!savedUser && initUser) {
+        dispatch(setUsername(initUser?.username));
+        dispatch(setProfilePicture(initUser?.photo_url));
+      }
 
+      WebApp.ready();
+
+      const allowedPlatforms = ["android", "ios", "tdesktop"];
+      if (!allowedPlatforms.includes(WebApp.platform)) {
+        router.push("/supported");
+      } else {
+        router.push("/supported");
+      }
+
+      if (!WebApp.isExpanded) {
+        WebApp.expand();
+      }
+    });
+  }, [dispatch, user, router]);
 
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-     
-    
     </div>
   );
 }

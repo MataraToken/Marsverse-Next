@@ -1,8 +1,6 @@
 
-
 "use client"
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import WebApp from "@twa-dev/sdk";
 import { Copy } from "lucide-react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/services/store";
@@ -10,12 +8,13 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 function Referral() {
-  WebApp.BackButton.hide();
 
   useEffect(() => {
     (async () => {
         const WebApp = (await import("@twa-dev/sdk")).default;
         WebApp.ready();
+        WebApp.BackButton.hide();
+
     })();
 }, []);
 
